@@ -17,14 +17,12 @@
     [super viewDidLoad];
     self.view.backgroundColor = [UIColor whiteColor];
     
-    // Add a close button
     closeButton = [UIButton buttonWithType:UIButtonTypeSystem];
     closeButton.frame = CGRectMake(20, 100, self.view.frame.size.width - 40, 30);
     [closeButton setTitle:@"Close Menu" forState:UIControlStateNormal];
     [closeButton addTarget:self action:@selector(closeMenu) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:closeButton];
     
-    // Add a volume slider
     volumeSlider = [[UISlider alloc] initWithFrame:CGRectMake(20, 150, self.view.frame.size.width - 40, 30)];
     volumeSlider.minimumValue = 0.0;
     volumeSlider.maximumValue = 1.0;
@@ -43,18 +41,16 @@
 }
 
 - (void)volumeChanged:(UISlider *)slider {
-    // Adjust device volume based on slider value
     [[AVAudioSession sharedInstance] setVolume:slider.value error:nil];
 }
 
 @end
 
-%hook TargetApplicationViewController
+%hook UIViewController
 
 - (void)viewDidLoad {
     %orig;
     
-    // Add gesture recognizer to trigger the mod menu
     UITapGestureRecognizer *tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(showModMenu)];
     [self.view addGestureRecognizer:tapGesture];
 }
