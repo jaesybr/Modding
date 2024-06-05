@@ -41,7 +41,8 @@
 }
 
 - (void)volumeChanged:(UISlider *)slider {
-    [[AVAudioSession sharedInstance] setVolume:slider.value error:nil];
+    // Adjust device volume based on slider value
+    [[AVAudioSession sharedInstance] setOutputVolume:slider.value error:nil];
 }
 
 @end
